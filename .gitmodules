@@ -1,0 +1,3 @@
+[submodule "hackpad-backup-g0v"]
+	path = hackpad-backup-g0v
+	url = https://github.com/g0v-data/hackpad-backup-g0v

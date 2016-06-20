@@ -16,7 +16,9 @@ import html2text
 
 sys.setrecursionlimit(200000)
 g = git.cmd.Git('hackpad-backup-g0v')
-print('pull from hackpad-backup-g0v: ' + g.pull())
+g.execute(["git", "submodule", "update"])
+print('pull from hackpad-backup-g0v: done')
+
 
 try:
 	last_update = open('last_update.txt').read()

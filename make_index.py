@@ -33,9 +33,12 @@ git_ff = {}
 for pad in data:
 	git_ff[pad['padid']] = pad
 
-# 讀取 last_pads.json ++
-with open('last_pads.json') as lp: 
-	last_pads = json.load(lp)
+try:
+	# 讀取 last_pads.json ++
+	with open('last_pads.json') as lp: 
+		last_pads = json.load(lp)
+except:
+	last_pads = {}
 
 ff = {}
 for k,v in git_ff.items():

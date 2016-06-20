@@ -1,6 +1,7 @@
 # search-hackpad-g0v
 
 這是 g0v 基礎建設的一個小坑，目標是做一個輕便快速的搜尋器，來取代 hackpad 現在的搜尋介面
+
 好處是：
 
 - 開新的專案、idea 之前，可以快速 review 一下是否有類似的討論或專案
@@ -19,10 +20,11 @@
 
 
 目前只先做到用 jieba 把 https://github.com/g0v-data/hackpad-backup-g0v 所有的 html 做成可搜尋的索引檔案
+
 現在有以下功能：
 
 ### make_index.py
-- 會先在 hackpad-backup-g0v 下面 git pull 檢查是否有新的檔案
+- 會先在 hackpad-backup-g0v 下面 git submodule update 檢查是否有新的檔案
 - 根據 hackpad-backup-g0v/pads.json 比對上次更新的時間、目前已經索引的檔案，將新增/更動的 html 重新 merge 到索引檔
 
 ### search.py
@@ -40,6 +42,13 @@ python3 & pip install:
 - jieba
 - whoosh
 - html2text
+
+
+`git submodule update --init`
+
+`python3 make_index.py`
+
+`python3 search.py`
 
 根據這個教學來改的: http://www.jeyzhang.com/realization-of-full-chinese-text-search-using-whoosh-and-jieba.html
 

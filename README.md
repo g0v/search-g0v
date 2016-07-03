@@ -37,11 +37,10 @@
 - 整合其他資料
 
 ----
-python3 & pip install:
 
-- jieba
-- whoosh
-- html2text
+```
+pip3 install -r requirments.txt
+```
 
 
 `git submodule update --init`
@@ -53,9 +52,4 @@ python3 & pip install:
 根據這個教學來改的: http://www.jeyzhang.com/realization-of-full-chinese-text-search-using-whoosh-and-jieba.html
 
 p.s 這是 @ttcat 第一次寫 python 有更好的做法請指教
-
-
-
-
-
 

@@ -3,3 +3,4 @@ html2text
 whoosh
 gitpython
 flask
+gunicorn

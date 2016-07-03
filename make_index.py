@@ -61,7 +61,7 @@ schema = Schema(title=TEXT(stored=True),
                         unique=True),
                 f=TEXT(stored=True,
                        analyzer=analyzer),
-                content=TEXT(stored=False,
+                content=TEXT(stored=True,
                              analyzer=analyzer),
                 modified=TEXT(stored=True))
 

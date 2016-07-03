@@ -2,3 +2,4 @@ jieba
 html2text
 whoosh
 gitpython
+flask

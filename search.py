@@ -13,8 +13,8 @@ searcher = ix.searcher()
 i = 0
 
 while i == 0:
-    user_input = input("Some input please: "
-                       )  # or `input("Some...` in python 3
+    user_input = input(
+        "Some input please: ")  # or `input("Some...` in python 3
     q = qp.parse(user_input)
     results = searcher.search(q, limit=None)
 

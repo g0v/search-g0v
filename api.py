@@ -19,8 +19,9 @@ class NullFormatter(highlight.Formatter):
 @app.route("/search")
 def search():
     keyword = request.args.get('keyword', '')
+    page = request.args.get('page', "1")
     q = qp.parse(keyword)
-    results = searcher.search(q, limit=None, terms=True)
+    results = searcher.search_page(q, int(page), terms=True)
     results.formatter = NullFormatter()
 
     rt = []

@@ -32,7 +32,6 @@ os.system('python get-g0v-repos.py')
 with open('data.json') as data_file:
     new_info = json.load(data_file)
 
-print(new_info)
 # update index
 to_update = {}
 for k, v in new_info['repos'].items():

@@ -1,11 +1,20 @@
 import pycurl, json
 import time
 from io import BytesIO
+import os
+
+
+username = os.getenv('GITHUB_USER_NAME')
+token = os.getenv('GITHUB_TOKEN')
+
+if username is None or token is None:
+    print("environment variable is missing: GITHUB_USER_NAME, GITHUB_TOKEN")
+    exit(1)
 
 
 def curl_wrapper(url):
 
-    userpwd = 'allanfann:f760f27fff249164fb2c463735dcc2c79508fb6e'
+    userpwd = username + ":" + token
     #auth = '?client_id=allanfann&client_secret=178054dcca58aece1009258b10c860b50ea3d0fa'
     c = pycurl.Curl()
     c.setopt(pycurl.URL, url)

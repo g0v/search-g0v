@@ -82,8 +82,6 @@ writer = ix.writer()
 
 for k, v in to_update.items():
 
-
-
     writer.update_document(repo_owner=v['repo_owner'],
                         repo_name=v['repo_name'],
                         repo_url=v['repo_url'],

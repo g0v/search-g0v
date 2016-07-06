@@ -36,7 +36,6 @@ count = 0
 result = {}
 result['repos'] = dict()
 
-
 for repo in repos:
 
     print("processing repo #" + str(count))
@@ -50,10 +49,7 @@ for repo in repos:
 
     url = 'https://api.github.com/repos/' + repo['owner']['login'] + '/' + repo['name'] +  '/readme'
     readme_str = curl_wrapper(url);
-    print (readme_str)
     readme_obj = json.loads(readme_str,encoding="utf-8")
-
-    #print readme_str
 
     if "url" in readme_obj:
         obj['readme_url'] = readme_obj['url']
@@ -61,10 +57,9 @@ for repo in repos:
     else:
         obj['readme_url'] = ''
         obj['readme_raw'] = ''
-    #print obj
+
     result['repos'][obj['repo_name']] = obj
 
-    #break
     #if count > 3:
     #    break
     count = count +1

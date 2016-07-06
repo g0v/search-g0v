@@ -65,8 +65,8 @@ for repo in repos:
     result['repos'][obj['repo_name']] = obj
 
     #break
-    if count > 3:
-        break
+    #if count > 3:
+    #    break
     count = count +1
 
 result['last_update'] = time.time()

@@ -105,10 +105,6 @@ for fk, fx in ff.items():
 
     print(title + " | " + fk + " | " + str(time.ctime(fx['last_backup_time'])))
 
-    # i = i + 1
-    # if(i == 10):
-    # 	break
-
 writer.commit(merge=True)
 open('last_update.txt', 'w').close()
 with open('last_update.txt', 'a') as out:

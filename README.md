@@ -38,18 +38,30 @@
 
 ----
 
-```
-pip3 install -r requirments.txt
-```
+### Installation
 
+    # 安裝相關套件
+    pip3 install -r requirements.txt
 
-`git submodule update --init`
+    # 設定 GitHub API 所需資訊 ( 抓取 g0v-repos 要用)
+    export GITHUB_USER_NAME=<your_github_username>
+    export GITHUB_TOKEN=<your_github_token>
 
-`python3 make_index.py`
+    # 下載 子模組的內容 ( search-hackpad-gov )
+    git submodule update --init
 
-`python3 search.py`
+    # 建立索引
+    python3 make_index.py
+    python3 make_index_2.py
+
+    # 進行搜尋 目前搜尋的入口是分開的 未來將整合再一起
+
+    # 搜尋 hackfoldr
+    python3 search.py
+    
+    # 搜尋 g0v-repos
+    python3 search2.py
 
 根據這個教學來改的: http://www.jeyzhang.com/realization-of-full-chinese-text-search-using-whoosh-and-jieba.html
 
 p.s 這是 @ttcat 第一次寫 python 有更好的做法請指教
-

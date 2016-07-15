@@ -18,8 +18,12 @@
 - g0v.tw
 - irc/slack log
 
+### 目前進度
 
-目前只先做到用 jieba 把 https://github.com/g0v-data/hackpad-backup-g0v 所有的 html 做成可搜尋的索引檔案
+1. 目前只先做到用 jieba 把 https://github.com/g0v-data/hackpad-backup-g0v 所有的 html 做成可搜尋的索引檔案
+2. 2016/6/23 新增 api.py 提供 web api
+3. 2016/6/23 新增 透過github api 抓取 g0v 帳號下的專案資訊
+
 
 現在有以下功能：
 
@@ -37,6 +41,7 @@
 - 整合其他資料
 
 ----
+
 
 ### Installation
 
@@ -58,7 +63,7 @@
 
     # 搜尋 hackfoldr
     python3 search.py
-    
+
     # 搜尋 g0v-repos
     python3 search2.py
 

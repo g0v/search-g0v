@@ -14,6 +14,20 @@ from whoosh.filedb.filestore import FileStorage
 from jieba.analyse import ChineseAnalyzer
 #import html2text
 
+import argparse
+
+
+# -------- Argument Parser Setting --------
+parser = argparse.ArgumentParser()
+parser.add_argument('-o', '--output', default='', nargs='+' ,help='index output directory')
+
+# -------- Retrieve Arg Options --------
+arg = parser.parse_args()
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+json_file = BASE_DIR + '/data.json'
+
 sys.setrecursionlimit(200000)
 
 # read old data and last update time
@@ -58,7 +72,7 @@ analyzer = ChineseAnalyzer()
 # 创建schema, stored为True表示能够被检索
 schema = Schema(source_type=TEXT(stored=True),
                 title=TEXT(stored=True),
-                content=ID(stored=True, analyzer=analyzer),
+                content=TEXT(stored=True, analyzer=analyzer),
                 created_at=TEXT(stored=True),
                 updated_at=TEXT(stored=True),
                 repository=TEXT(stored=True),
@@ -70,7 +84,8 @@ schema = Schema(source_type=TEXT(stored=True),
 # 注意：字符串格式需要为unicode格式
 
 # 存储schema信息至'indexdir'目录下
-indexdir = 'indexdir/'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+indexdir = BASE_DIR + '/indexdir/'
 
 if not os.path.exists(indexdir):
     os.mkdir(indexdir)

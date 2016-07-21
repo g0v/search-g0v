@@ -73,7 +73,7 @@ analyzer = ChineseAnalyzer()
 
 schema = Schema(source_type=TEXT(stored=True),
                 title=TEXT(stored=True),
-                content=ID(stored=True, analyzer=analyzer),
+                content=TEXT(stored=True, analyzer=analyzer),
                 created_at=TEXT(stored=True),
                 updated_at=TEXT(stored=True),
                 repository=TEXT(stored=True),

@@ -26,11 +26,13 @@ def search():
 
     rt = []
     for hit in results:
-        rt.append({
+        obj = {
             "title": hit.get("title", "untitle"),
             "highlights": hit.highlights("content"),
-            "url": "https://g0v.hackpad.com{}".format(hit.get("path", "")),
-        })
+            "url": hit.get("repository",""),
+        }
+
+        rt.append(obj)
 
     return jsonify(rt)
 

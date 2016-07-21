@@ -1,11 +1,6 @@
 # coding=utf-8
-import os
+import os,time,sys,re,git,json
 from os import walk
-import time
-import sys
-import re
-import git
-import json
 
 from whoosh.index import create_in
 from whoosh.fields import *
@@ -13,11 +8,22 @@ import whoosh.index as index
 from whoosh.filedb.filestore import FileStorage
 from jieba.analyse import ChineseAnalyzer
 import html2text
+import argparse
 
 sys.setrecursionlimit(200000)
 g = git.cmd.Git('hackpad-backup-g0v')
 g.execute(["git", "submodule", "update"])
 print('pull from hackpad-backup-g0v: done')
+
+
+# -------- Argument Parser Setting --------
+parser = argparse.ArgumentParser()
+parser.add_argument('-o', '--output', default='', nargs='+' ,help='index output directory')
+
+# -------- Retrieve Arg Options --------
+arg = parser.parse_args()
+
+
 
 try:
     last_update = open('last_update.txt').read()
@@ -56,20 +62,36 @@ print("===================================")
 analyzer = ChineseAnalyzer()
 
 # 创建schema, stored为True表示能够被检索
-schema = Schema(title=TEXT(stored=True),
-                path=ID(stored=True,
-                        unique=True),
-                f=TEXT(stored=True,
-                       analyzer=analyzer),
-                content=TEXT(stored=True,
-                             analyzer=analyzer),
-                modified=TEXT(stored=True))
+#schema = Schema(source_type=TEXT(stored=True),
+#                title=TEXT(stored=True),
+#                content=ID(stored=True,
+#                        unique=True),
+#                f=TEXT(stored=True,
+#                       analyzer=analyzer),
+#                content=TEXT(stored=True,
+#                             analyzer=analyzer),
+#                modified=TEXT(stored=True))
+
+schema = Schema(source_type=TEXT(stored=True),
+                title=TEXT(stored=True),
+                content=TEXT(stored=True, analyzer=analyzer),
+                created_at=TEXT(stored=True),
+                updated_at=TEXT(stored=True),
+                repository=TEXT(stored=True),
+                category=TEXT(stored=True,analyzer=analyzer),
+                owner=TEXT(stored=True))
 
 # 按照schema定义信息，增加需要建立索引的文档
 # 注意：字符串格式需要为unicode格式
 
 # 存储schema信息至'indexdir'目录下
-indexdir = 'indexdir/'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+indexdir = BASE_DIR + '/indexdir/'
+
+print(arg)
+
+if arg.output[0] != '':
+    indexdir = arg.output[0]
 
 if not os.path.exists(indexdir):
     os.mkdir(indexdir)
@@ -97,11 +119,14 @@ for fk, fx in ff.items():
     all_text = all_text.strip()
     all_text = re.sub('[\s+]', '', all_text)
 
-    writer.update_document(title=title,
-                           path=u'/' + fk,
-                           f=fk,
-                           content=all_text,
-                           modified=str(time.ctime(fx['last_backup_time'])))
+    writer.update_document(source_type='hackpad-backup',
+                            title=title,
+                            content=all_text,
+                            #created_at=,
+                            updated_at=str(time.ctime(fx['last_backup_time'])),
+                            repository="https://g0v.hackpad.com/"+fk
+                           #f=fk,
+                            )
 
     print(title + " | " + fk + " | " + str(time.ctime(fx['last_backup_time'])))
 

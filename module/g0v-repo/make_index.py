@@ -1,24 +1,33 @@
 # coding=utf-8
-import os
+import os,sys,re,time,json
 from os import walk
-import time
-import sys
-import re
-#import git
-import json
 
 from whoosh.index import create_in
 from whoosh.fields import *
 import whoosh.index as index
 from whoosh.filedb.filestore import FileStorage
 from jieba.analyse import ChineseAnalyzer
-#import html2text
+
+import argparse
+
+
+# -------- Argument Parser Setting --------
+parser = argparse.ArgumentParser()
+parser.add_argument('-o', '--output', default='', nargs='+' ,help='index output directory')
+
+# -------- Retrieve Arg Options --------
+arg = parser.parse_args()
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+json_file = BASE_DIR + '/data.json'
+
 
 sys.setrecursionlimit(200000)
 
 # read old data and last update time
 try:
-    with open('data.json') as data_file:
+    with open(json_file) as data_file:
         old_info = json.load(data_file)
         last_update = old_info['last_update']
 except:
@@ -27,9 +36,10 @@ except:
     last_update = 0
 
 # update data.json
-os.system('python get-g0v-repos.py')
 
-with open('data.json') as data_file:
+os.system('python3 ' + BASE_DIR + '/get-g0v-repos.py')
+
+with open(json_file) as data_file:
     new_info = json.load(data_file)
 
 # update index
@@ -51,21 +61,34 @@ print("===================================")
 analyzer = ChineseAnalyzer()
 
 # 创建schema, stored为True表示能够被检索
-schema = Schema(repo_owner=TEXT(stored=True),
-                repo_name=TEXT(stored=True, analyzer=analyzer),
-                repo_url=ID(stored=True, unique=True),
+#schema = Schema(source_type=TEXT(stored=True),
+#                repo_owner=TEXT(stored=True),
+#                repo_name=TEXT(stored=True, analyzer=analyzer),
+#                repo_url=ID(stored=True, unique=True),
+#                created_at=TEXT(stored=True),
+#                updated_at=TEXT(stored=True),
+#                repo_html_url=TEXT(stored=True),
+#                readme=TEXT(stored=True, analyzer=analyzer),
+#                readme_url=TEXT(stored=True))
+
+schema = Schema(source_type=TEXT(stored=True),
+                title=TEXT(stored=True),
+                content=TEXT(stored=True, analyzer=analyzer),
                 created_at=TEXT(stored=True),
                 updated_at=TEXT(stored=True),
-                repo_html_url=TEXT(stored=True),
-                readme=TEXT(stored=True, analyzer=analyzer),
-                readme_url=TEXT(stored=True))
-
+                repository=TEXT(stored=True),
+                category=TEXT(stored=True,analyzer=analyzer),
+                owner=TEXT(stored=True))
 
 # 按照schema定义信息，增加需要建立索引的文档
 # 注意：字符串格式需要为unicode格式
 
 # 存储schema信息至'indexdir'目录下
-indexdir = 'indexdir2/'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+indexdir = BASE_DIR + '/indexdir/'
+
+if arg.output[0] != '':
+    indexdir = arg.output[0]
 
 if not os.path.exists(indexdir):
     os.mkdir(indexdir)
@@ -81,14 +104,17 @@ writer = ix.writer()
 
 for k, v in to_update.items():
 
-    writer.update_document(repo_owner=v['repo_owner'],
-                        repo_name=v['repo_name'],
-                        repo_url=v['repo_url'],
+    writer.update_document(source_type='g0v-repos',
+                        title=v['repo_name'],
+                        content=re.sub('[\s+]', '', v['readme_raw']),
                         created_at=v['created_at'],
                         updated_at=v['updated_at'],
-                        repo_html_url=v['repo_html_url'],
-                        readme=re.sub('[\s+]', '', v['readme_raw']),
-                        readme_url=v['readme_url'])
+                        repository=v['repo_url'],
+                        #category=
+                        #repo_html_url=v['repo_html_url'],
+                        #readme_url=v['readme_url']
+                        owner=v['repo_owner'])
+
 
     print( v['repo_name'] + " | " + v['updated_at'])
 

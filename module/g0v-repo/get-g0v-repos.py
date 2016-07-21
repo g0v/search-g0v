@@ -3,15 +3,6 @@ import time
 from io import BytesIO
 import os
 
-
-username = os.getenv('GITHUB_USER_NAME')
-token = os.getenv('GITHUB_TOKEN')
-
-if username is None or token is None:
-    print("environment variable is missing: GITHUB_USER_NAME, GITHUB_TOKEN")
-    exit(1)
-
-
 def curl_wrapper(url):
 
     userpwd = username + ":" + token
@@ -26,6 +17,16 @@ def curl_wrapper(url):
 
     return (buffer.getvalue()).decode('utf-8')
 
+#----------------------------------------
+
+
+username = os.getenv('GITHUB_USER_NAME')
+token = os.getenv('GITHUB_TOKEN')
+
+if username is None or token is None:
+    print("environment variable is missing: GITHUB_USER_NAME, GITHUB_TOKEN")
+    exit(1)
+
 # get repos
 repos = []
 page = 1
@@ -33,6 +34,7 @@ while True:
 
     url = 'https://api.github.com/orgs/g0v/repos?page=' + str(page) + '&per_page=100'
     repos_str = curl_wrapper(url)
+    #print(repos_str)
     tmp = json.loads(repos_str,encoding="utf-8")
     repos = repos + tmp
     if len(tmp) < 100:
@@ -48,6 +50,8 @@ result['repos'] = dict()
 for repo in repos:
 
     print("processing repo #" + str(count))
+    #print(json.dumps(repo,encoding="utf-8"))
+    #exit(1)
     obj = {}
     obj['repo_owner'] = repo['owner']['login']
     obj['repo_name'] = repo['name']
@@ -75,7 +79,10 @@ for repo in repos:
 
 result['last_update'] = time.time()
 
-with open('data.json', 'w') as outfile:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+json_file = BASE_DIR + '/data.json'
+
+with open(json_file, 'w') as outfile:
     json.dump(result, outfile)
 
 print("done")

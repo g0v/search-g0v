@@ -87,12 +87,9 @@ schema = Schema(source_type=TEXT(stored=True),
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 indexdir = BASE_DIR + '/indexdir/'
 
-print(arg)
-
 if arg.output[0] != '':
     indexdir = arg.output[0]
 
-print(indexdir)
 if not os.path.exists(indexdir):
     os.mkdir(indexdir)
     storage = FileStorage(indexdir)

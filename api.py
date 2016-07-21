@@ -29,7 +29,7 @@ def search():
         obj = {
             "title": hit.get("title", "untitle"),
             "highlights": hit.highlights("content"),
-            "url": "https://g0v.hackpad.com{}".format(hit.get("path", "")),
+            "url": hit.get("repository",""),
         }
 
         rt.append(obj)

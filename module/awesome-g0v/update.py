@@ -38,10 +38,10 @@ result = dict()
 result['repos'] = json.loads(repo_raw,encoding="utf-8")
 result['last_update'] = time.time()
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+json_file = BASE_DIR + '/data.json'
 
-
-
-with open('data.json', 'w') as outfile:
+with open(json_file, 'w') as outfile:
     json.dump(result, outfile)
 
 

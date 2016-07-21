@@ -32,7 +32,7 @@ sys.setrecursionlimit(200000)
 
 # read old data and last update time
 try:
-    with open('data.json') as data_file:
+    with open(json_file) as data_file:
         old_info = json.load(data_file)
         last_update = old_info['last_update']
 except:
@@ -41,9 +41,10 @@ except:
     last_update = 0
 
 # update data.json
-#os.system('python3 get-g0v-repos.py')
+os.system('python3 ' + BASE_DIR + '/update.py')
 
-with open('data.json') as data_file:
+print(json_file)
+with open(json_file) as data_file:
     new_info = json.load(data_file)
 
 # update index
@@ -86,6 +87,9 @@ schema = Schema(source_type=TEXT(stored=True),
 # 存储schema信息至'indexdir'目录下
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 indexdir = BASE_DIR + '/indexdir/'
+
+if arg.output[0] != '':
+    indexdir = arg.output[0]
 
 if not os.path.exists(indexdir):
     os.mkdir(indexdir)

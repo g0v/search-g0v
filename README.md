@@ -72,6 +72,6 @@
 
 ### Contributors
 
-- @ttcat
-- @allanfann
-- @andyhorng
+- ttcat
+- allanfann
+- andyhorng

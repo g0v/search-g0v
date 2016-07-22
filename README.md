@@ -69,4 +69,9 @@
 
 根據這個教學來改的: http://www.jeyzhang.com/realization-of-full-chinese-text-search-using-whoosh-and-jieba.html
 
-p.s 這是 @ttcat 第一次寫 python 有更好的做法請指教
+
+### Contributors
+
+- @ttcat
+- @allanfann
+- @andyhorng

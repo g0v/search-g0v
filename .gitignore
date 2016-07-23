@@ -2,7 +2,7 @@ data.json
 last_update.txt
 last_pads.json
 indexdir/
-
+.bash_profile
 
 module/awesome-g0v/data.json
 module/awesome-g0v/indexdir/
@@ -13,4 +13,3 @@ module/g0v-repo/data.json
 module/hackpad-backup/indexdir/
 module/hackpad-backup/last_update.txt
 module/hackpad-backup/last_pads.txt
-

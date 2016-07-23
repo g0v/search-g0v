@@ -18,3 +18,7 @@ os.system('python3 module/g0v-repo/make_index.py -o %s'  % indexdir)
 
 # update awesome g0v
 os.system('python3 module/awesome-g0v/make_index.py -o %s' % indexdir)
+
+# update hackfoldr g0v
+os.system('python3 module/hackfoldr/make_index.py -o %s' % indexdir)
+

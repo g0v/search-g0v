@@ -2,8 +2,8 @@ data.json
 last_update.txt
 last_pads.json
 indexdir/
-.bash_profile
 
+.bash_profile
 module/awesome-g0v/data.json
 module/awesome-g0v/indexdir/
 
@@ -15,3 +15,7 @@ module/hackpad-backup/last_update.txt
 module/hackpad-backup/last_pads.txt
 
 __pycache__
+
+web/__pycache__/
+web/views/__pycache__/
+

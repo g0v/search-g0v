@@ -43,7 +43,6 @@
 
 ----
 
-
 ### Installation
 
     # 安裝相關套件
@@ -51,6 +50,7 @@
 
     # 設定 GitHub API 所需資訊 ( 抓取 g0v-repos 要用)
     #mac 寫在 .bash_profile 後執行 source .bash_profile
+
     export GITHUB_USER_NAME=<your_github_username>
     export GITHUB_TOKEN=<your_github_token>
 

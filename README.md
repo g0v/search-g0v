@@ -27,12 +27,13 @@
 
 現在有以下功能：
 
-### make_index.py
+### build.py
 - 會先在 hackpad-backup-g0v 下面 git submodule update 檢查是否有新的檔案
 - 根據 hackpad-backup-g0v/pads.json 比對上次更新的時間、目前已經索引的檔案，將新增/更動的 html 重新 merge 到索引檔
+- 會去抓 g0v github 下面所有 repo 的 README.md
 
 ### search.py
-- 載入索引器後，輸入關鍵字，會找出相關的 hackpad id, last modify(commit) time, title
+- 載入索引器後，輸入關鍵字，會找出相關的 github & hackpad id, last modify(commit) time, title
 
 接下來要：
 
@@ -49,24 +50,24 @@
     pip3 install -r requirements.txt
 
     # 設定 GitHub API 所需資訊 ( 抓取 g0v-repos 要用)
+    #mac 寫在 .bash_profile 後執行 source .bash_profile
     export GITHUB_USER_NAME=<your_github_username>
     export GITHUB_TOKEN=<your_github_token>
-
+    
     # 下載 子模組的內容 ( search-hackpad-gov )
     git submodule update --init
 
     # 建立索引
-    python3 make_index.py
-    python3 make_index_2.py
+    python3 build.py
 
-    # 進行搜尋 目前搜尋的入口是分開的 未來將整合再一起
-
-    # 搜尋 hackfoldr
+    # 搜尋 hackfoldr & g0v-repos
     python3 search.py
-
-    # 搜尋 g0v-repos
-    python3 search2.py
 
 根據這個教學來改的: http://www.jeyzhang.com/realization-of-full-chinese-text-search-using-whoosh-and-jieba.html
 
-p.s 這是 @ttcat 第一次寫 python 有更好的做法請指教
+
+### Contributors
+
+- ttcat
+- allanfann
+- andyhorng

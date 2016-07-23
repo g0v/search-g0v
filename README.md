@@ -70,7 +70,7 @@
 
 ### Development
 
-    $ docker-compose run app docker-compose run app python3 build.py # build index
+    $ docker-compose run app python3 build.py # build index
     $ docker-compose up # start the api server, go to http://localhost:5000/search?keyword=test to see result
 
 ### Contributors

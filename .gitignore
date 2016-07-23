@@ -13,3 +13,5 @@ module/g0v-repo/data.json
 module/hackpad-backup/indexdir/
 module/hackpad-backup/last_update.txt
 module/hackpad-backup/last_pads.txt
+
+__pycache__

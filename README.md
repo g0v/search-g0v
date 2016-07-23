@@ -43,7 +43,6 @@
 
 ----
 
-
 ### Installation
 
     # 安裝相關套件
@@ -51,9 +50,10 @@
 
     # 設定 GitHub API 所需資訊 ( 抓取 g0v-repos 要用)
     #mac 寫在 .bash_profile 後執行 source .bash_profile
+
     export GITHUB_USER_NAME=<your_github_username>
     export GITHUB_TOKEN=<your_github_token>
-    
+
     # 下載 子模組的內容 ( search-hackpad-gov )
     git submodule update --init
 
@@ -65,6 +65,10 @@
 
 根據這個教學來改的: http://www.jeyzhang.com/realization-of-full-chinese-text-search-using-whoosh-and-jieba.html
 
+### Development
+
+    $ docker-compose run app docker-compose run app python3 build.py # build index
+    $ docker-compose up # start the api server, go to http://localhost:5000/search?keyword=test to see result
 
 ### Contributors
 

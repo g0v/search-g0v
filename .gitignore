@@ -14,3 +14,5 @@ module/hackpad-backup/indexdir/
 module/hackpad-backup/last_update.txt
 module/hackpad-backup/last_pads.txt
 
+web/__pycache__/
+web/views/__pycache__/

@@ -11,6 +11,8 @@ indexdir = BASE_DIR + '/indexdir'
 # hackpad backup
 # update hackpad backup data from submodule (https://github.com/g0v-data/hackpad-backup-g0v)
 os.system('git submodule update --init')
+# update hackfoldr g0v
+os.system('python3 module/hackfoldr/make_index.py -o %s' % indexdir)
 os.system('python3 module/hackpad-backup/make_index.py -o %s' % indexdir)
 
 # g0v-repo
@@ -18,7 +20,4 @@ os.system('python3 module/g0v-repo/make_index.py -o %s'  % indexdir)
 
 # update awesome g0v
 os.system('python3 module/awesome-g0v/make_index.py -o %s' % indexdir)
-
-# update hackfoldr g0v
-os.system('python3 module/hackfoldr/make_index.py -o %s' % indexdir)
 

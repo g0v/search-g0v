@@ -60,8 +60,11 @@
     # 建立索引
     python3 build.py
 
-    # 搜尋 hackfoldr & g0v-repos
+    # 透過 command line 搜尋
     python3 search.py
+
+    # 啟動 web server (透過網頁搜尋)
+    python3 web.py
 
 根據這個教學來改的: http://www.jeyzhang.com/realization-of-full-chinese-text-search-using-whoosh-and-jieba.html
 

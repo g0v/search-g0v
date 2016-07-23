@@ -10,6 +10,8 @@ module/awesome-g0v/indexdir/
 module/g0v-repo/indexdir/
 module/g0v-repo/data.json
 
+module/hackfoldr/hackfoldr.json
+
 module/hackpad-backup/indexdir/
 module/hackpad-backup/last_update.txt
 module/hackpad-backup/last_pads.txt

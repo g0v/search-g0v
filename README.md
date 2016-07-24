@@ -91,3 +91,6 @@
 - ttcat
 - allanfann
 - andyhorng
+
+### g0v Slack channel: #search
+Join by yourself: http://join.g0v.today/

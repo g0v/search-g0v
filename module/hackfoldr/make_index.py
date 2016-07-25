@@ -56,7 +56,8 @@ analyzer = ChineseAnalyzer()
 #                readme=TEXT(stored=True, analyzer=analyzer),
 #                readme_url=TEXT(stored=True))
 
-schema = Schema(source_type=TEXT(stored=True),
+schema = Schema(guid=ID(stored=True),
+                source_type=TEXT(stored=True),
                 title=TEXT(stored=True),
                 content=TEXT(stored=True, analyzer=analyzer),
                 created_at=TEXT(stored=True),
@@ -93,7 +94,8 @@ for k, v in to_update.items():
     except:
         this_content = " "
 
-    writer.update_document(source_type='hackfoldr',
+    writer.update_document(guid="hackfoldr_%s" % v['url'],
+                        source_type='hackfoldr',
                         title=k,
                         content=re.sub('[\s+]', '', this_content),
                         updated_at=str(time.time()),

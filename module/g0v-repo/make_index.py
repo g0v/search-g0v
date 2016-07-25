@@ -71,7 +71,8 @@ analyzer = ChineseAnalyzer()
 #                readme=TEXT(stored=True, analyzer=analyzer),
 #                readme_url=TEXT(stored=True))
 
-schema = Schema(source_type=TEXT(stored=True),
+schema = Schema(guid=ID(stored=True),
+                source_type=TEXT(stored=True),
                 title=TEXT(stored=True),
                 content=TEXT(stored=True, analyzer=analyzer),
                 created_at=TEXT(stored=True),
@@ -104,7 +105,8 @@ writer = ix.writer()
 
 for k, v in to_update.items():
 
-    writer.update_document(source_type='g0v-repos',
+    writer.update_document(guid="github_%s" % v['repo_url'],
+                        source_type='g0v-repos',
                         title=v['repo_name'],
                         content=re.sub('[\s+]', '', v['readme_raw']),
                         created_at=v['created_at'],

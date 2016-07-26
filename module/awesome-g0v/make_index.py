@@ -71,7 +71,8 @@ print("===================================")
 analyzer = ChineseAnalyzer()
 
 # 创建schema, stored为True表示能够被检索
-schema = Schema(source_type=TEXT(stored=True),
+schema = Schema(guid=ID(stored=True),
+                source_type=TEXT(stored=True),
                 title=TEXT(stored=True),
                 content=TEXT(stored=True, analyzer=analyzer),
                 created_at=TEXT(stored=True),
@@ -105,7 +106,8 @@ writer = ix.writer()
 
 for k, v in to_update.items():
 
-    writer.update_document(source_type='awesome-g0v',
+    writer.update_document(guid="awesome_%s" % v['repository'],
+                            source_type='awesome-g0v',
                             title=v['name'],
                             content=v['description'],
                             #created_at=TEXT(stored=True),

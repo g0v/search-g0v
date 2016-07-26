@@ -72,7 +72,8 @@ analyzer = ChineseAnalyzer()
 #                             analyzer=analyzer),
 #                modified=TEXT(stored=True))
 
-schema = Schema(source_type=TEXT(stored=True),
+schema = Schema(guid=ID(stored=True),
+                source_type=TEXT(stored=True),
                 title=TEXT(stored=True),
                 content=TEXT(stored=True, analyzer=analyzer),
                 created_at=TEXT(stored=True),
@@ -119,7 +120,8 @@ for fk, fx in ff.items():
     all_text = all_text.strip()
     all_text = re.sub('[\s+]', '', all_text)
 
-    writer.update_document(source_type='hackpad-backup',
+    writer.update_document(guid="hackpad_%s" % "https://g0v.hackpad.com/"+fk,
+                            source_type='hackpad-backup',
                             title=title,
                             content=all_text,
                             #created_at=,

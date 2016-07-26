@@ -18,6 +18,8 @@ module/hackpad-backup/last_pads.txt
 
 __pycache__
 
+web/*.pyc
+web/views/*.pyc
 web/__pycache__/
 web/views/__pycache__/
 

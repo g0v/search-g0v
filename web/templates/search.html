@@ -1,70 +1,77 @@
 <!doctype html>
+<html>
+<head>
+  <title> search-g0v </title>
+  <meta charset=utf-8>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-<title> search-g0v </title>
-<meta charset=utf-8>
-<script type=text/javascript src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <link rel="stylesheet" type=text/css href="{{ url_for('static',filename='css/style.css') }}" >
 
-<link rel="stylesheet" type=text/css href="{{ url_for('static',filename='css/style.css') }}" >
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
 
+<body>
+  <div class="container">
+  	<div class="row">
+      <center><h2>search-g0v</h2></center>
+      <div class="col-lg-12">
+        <form id="search" accept-charset="utf-8" method="post" action="/">
+          <input type="search" class="form-control" id="input-search" name="keyword" placeholder="Search g0v ..." value="{{ keyword }}" >
+        </form>
+      </div>
 
-
-
-<script type=text/javascript >
-$(function() {
-     $('#input-search').on('keyup', function(event) {
-
-       if(event.keyCode == 13){
-        $('#search').submit();
-       }
-     });
-   });
-</script>
-<div class="container">
-	<div class="row">
-    <center><h2>search-g0v</h2></center>
-        <div class="col-lg-12">
-          <form id="search" accept-charset="utf-8" method="post" action="/">
-            <input type="search" class="form-control" id="input-search" name="keyword" placeholder="Search g0v ..." value="{{ keyword }}" >
-          </form>
-        </div>
-
-        <div class="col-lg-12">
+      <div class="col-lg-12">
+        {% if search %}
+        <label>共約 {{ search.count | default('many') }} 項結果，這是第 {{ search.pagenum | default('?') }} 頁 (搜尋時間：{{ search.time | default('many') }} 秒) </label>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="searchable-container">
           {% if search %}
-          <label>共約 {{ search.count | default('many') }} 項結果，這是第 {{ search.pagenum | default('?') }} 頁 (搜尋時間：{{ search.time | default('many') }} 秒) </label>
+          {% for item in search.results %}
+          <div class="items col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix">
+             <div class="info-block block-info clearfix">
+                  <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+                  <p>{{ item.source }} <a href="{{ item.url }}">{{ item.url }}</a></p>
+                  <p>{{ item.highlights | safe }} </p>
+              </div>
+          </div>
+          {% endfor %}
           {% endif %}
         </div>
-        <br>
-        <br>
-        <br>
-        <div class="col-lg-12">
-          <div class="searchable-container">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <center>
+          <ul class="pagination">
             {% if search %}
-            {% for item in search.results %}
-            <div class="items col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix">
-               <div class="info-block block-info clearfix">
-                    <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
-                    <p>{{ item.source }} <a href="{{ item.url }}">{{ item.url }}</a></p>
-                    <p>{{ item.highlights | safe }} </p>
-                </div>
-            </div>
+            {% for page in search.pages %}
+            <li><a href="{{ page.url }}" >{{ page.title }}</a></li>
             {% endfor %}
             {% endif %}
-          </div>
-        </div>
-        <div class="col-lg-12">
-          <center>
-            <ul class="pagination">
-              {% if search %}
-              {% for page in search.pages %}
-              <li><a href="{{ page.url }}" >{{ page.title }}</a></li>
-              {% endfor %}
-              {% endif %}
-            </ul>
-          </center>
-        </div>
+          </ul>
+        </center>
+      </div>
+    </div>
+  </div>
+
+
+  <script type=text/javascript src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script type=text/javascript >
+  $(function() {
+       $('#input-search').on('keyup', function(event) {
+
+         if(event.keyCode == 13){
+          $('#search').submit();
+         }
+       });
+     });
+  </script>
+</body>

@@ -42,20 +42,22 @@ $(function() {
         <br>
         <br>
         <br>
-        <div class="searchable-container">
-          {% if search %}
-          {% for item in search.results %}
-          <div class="items col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix">
-             <div class="info-block block-info clearfix">
-                  <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
-                  <p>{{ item.source }} <a href="{{ item.url }}">{{ item.url }}</a></p>
-                  <p>{{ item.highlights | safe }} </p>
-              </div>
+        <div class="col-lg-12">
+          <div class="searchable-container">
+            {% if search %}
+            {% for item in search.results %}
+            <div class="items col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix">
+               <div class="info-block block-info clearfix">
+                    <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+                    <p>{{ item.source }} <a href="{{ item.url }}">{{ item.url }}</a></p>
+                    <p>{{ item.highlights | safe }} </p>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
           </div>
-          {% endfor %}
-          {% endif %}
         </div>
-        <div class="container">
+        <div class="col-lg-12">
           <center>
             <ul class="pagination">
               {% if search %}

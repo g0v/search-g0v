@@ -1,6 +1,7 @@
-jieba
-html2text
-whoosh
-gitpython
-flask
-gunicorn
+Flask==0.10
+html2text==2016.1.8
+jieba==0.38
+Whoosh==2.7.4
+flask_openid==1.2.5
+GitPython==2.0.7
+pycurl==7.43.0

@@ -9,25 +9,26 @@
 - 不用在不同的平台上重複搜尋
 - 搜尋結果不需要無止境的分頁、外連
 
-# 2016/10 新改版
+## 2016/10 新改版
 
-1. Jim 將抓 github README, hackfoldr 等 component 都改以像 backup-hackpad 的方式，用新的 repo 定時來處理。未來如果有需要用到這些資料的其他專案，就可以直接連結這些 repo files，取代原本 build.py 的功能
+- Jim 將抓 github README, hackfoldr 等 component 都改以像 backup-hackpad 的方式，用新的 repo 定時來處理。未來如果有需要用到這些資料的其他專案，就可以直接連結這些 repo files，取代原本 build.py 的功能
 
-[hackfoldr]
-code repo: https://github.com/jmehsieh/hackfoldr-backup
-data repo: https://github.com/jmehsieh/hackfoldr-backup-g0v
+  [hackfoldr]
+  - code repo: https://github.com/jmehsieh/hackfoldr-backup
+  - data repo: https://github.com/jmehsieh/hackfoldr-backup-g0v
 
-[repo-info]
-code repo: https://github.com/jmehsieh/generate-g0v-repo-info
-data repo: https://github.com/jmehsieh/g0v-repo-info
+  [repo-info]
+  - code repo: https://github.com/jmehsieh/generate-g0v-repo-info
+  - data repo: https://github.com/jmehsieh/g0v-repo-info
 
-2. Ronnywang 用 elasticsearch 來取代原本的結巴分詞與 whoosh 的 api 功能 
+- Ronnywang 用 elasticsearch 來取代原本的結巴分詞與 whoosh 的 api 功能 
 
-目前 API 位置在 https://api.search.g0v.io/query.php?q= 
+  目前 API 位置在 https://api.search.g0v.io/query.php?q= 
 
 
+===
 
-====
+### 舊版
 
 現在有以下功能：
 
@@ -105,12 +106,14 @@ data repo: https://github.com/jmehsieh/g0v-repo-info
 5. 2016/07/23 整合 hackfoldr 進索引檔
 6. 2016/07/23 專案改名 search-g0v
 7. 2016/07/24 前端介面 web.py
+8. 2016/10 改版
 
 ### Contributors
 
 - ttcat
 - allanfann
 - andyhorng
+- ronnywang
 
 ### g0v Slack channel: #search
 Join by yourself: http://join.g0v.today/
